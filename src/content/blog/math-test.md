@@ -3,6 +3,7 @@ title: "Math Rendering Test"
 date: 2025-11-02
 tags: ["math", "test"]
 authors: ["default"]
+draft: true
 ---
 
 # Testing KaTeX Math Rendering
@@ -57,6 +58,4 @@ Euler's formula: $e^{i\pi} + 1 = 0$
 
 Greek letters: $\alpha, \beta, \gamma, \Delta, \Omega$
 
-## Conclusion
 
-If you can see properly formatted mathematical equations above, KaTeX is working correctly!

@@ -24,16 +24,6 @@ export const authors: Record<string, Author> = {
       support: 'https://coffeebede.com/echowane',
     },
   },
-  'jane': {
-    id: 'jane',
-    name: 'Jane Doe',
-    bio: 'Software engineer specializing in web development and security.',
-    avatar: '/avatars/jane.jpg',
-    social: {
-      github: 'https://github.com/janedoe',
-      email: 'jane@example.com',
-    },
-  },
 };
 
 // Helper function to get author by ID

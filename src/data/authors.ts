@@ -21,7 +21,6 @@ export const authors: Record<string, Author> = {
       github: 'https://www.github.com/EchoWane',
       linkedin: 'https://www.linkedin.com/in/someone/',
       email: 'amir.rabiee2001@outlook.com',
-      support: 'https://coffeebede.com/echowane',
     },
   },
 };

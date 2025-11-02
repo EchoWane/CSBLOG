@@ -22,14 +22,14 @@ export const siteConfig: SiteConfig = {
   site: "https://echowane.github.io", // your site url
   base: "/CSBLOG",
   title: "CSBLOG",
-  slogan: "A minimal blog focused on Cybersecurity and Software Development",
-  description: "Hi there! I'm Amir, a Cybersecurity master's student at Isfahan University of Technology. If you liked or found this blog useful, please consider supporting using the coffee link below!",
+  slogan: "A minimal, multi-author blog focused on Cybersecurity and Software Development",
+  description: "Hi there! I'm Amir, a Cybersecurity master's student at Isfahan University of Technology. I like to write about my learning journey. If you're intrested in contributing to this blog, head to the GitHub repository.",
   social: {
-    github: "https://www.github.com/EchoWane", // leave empty if you don't want to show the github
+    github: "https://www.github.com/EchoWane/CSBLOG", // leave empty if you don't want to show the github
     linkedin: "https://www.linkedin.com/in/someone/", // leave empty if you don't want to show the linkedin
     email: "amir.rabiee2001@outlook.com", // leave empty if you don't want to show the email
     rss: true, // set this to false if you don't want to provide an rss feed
-    support: "https://coffeebede.com/echowane", // leave empty if you don't want to show support link
+    support: "",
   },
   homepage: {
     maxPosts: 5,

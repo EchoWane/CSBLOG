@@ -10,6 +10,6 @@ Want to write a guest post or contribute? Pull requests welcome!
 4. Follow the frontmatter format from existing posts
 5. Submit a PR with your post
 
-Topics I'm interested in: cybersecurity, penetration testing, backend/frontend development, system security, CTF writeups.
+Topics I'm interested in: cryptography, penetration testing, backend/frontend development, reverse engineering, CTF writeups.
 
 Feel free to open an issue first if you want to discuss a topic before writing.

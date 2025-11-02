@@ -18,7 +18,7 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  site: "https://csblog.ir/", // your site url
+  site: "https://echowane.github.io", // your site url
   title: "CSBLOG",
   slogan: "A minimal blog focused on Cybersecurity and Software Development",
   description: "Hi there! I'm Amir, a Cybersecurity master's student at Isfahan University of Technology. If you liked or found this blog useful, please consider supporting using the coffee link below!",

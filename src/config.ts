@@ -5,6 +5,7 @@ export interface SiteConfig {
   slogan: string;
   description?: string;
   site: string,
+  base: string,
   social: {
     github?: string;
     linkedin?: string;
@@ -19,6 +20,7 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   site: "https://echowane.github.io", // your site url
+  base: "/CSBLOG",
   title: "CSBLOG",
   slogan: "A minimal blog focused on Cybersecurity and Software Development",
   description: "Hi there! I'm Amir, a Cybersecurity master's student at Isfahan University of Technology. If you liked or found this blog useful, please consider supporting using the coffee link below!",

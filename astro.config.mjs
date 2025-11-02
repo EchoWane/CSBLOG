@@ -9,7 +9,7 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: siteConfig.site,
-  base: "/CSBLOG",
+  base: siteConfig.base,
   integrations: [tailwind(), sitemap()],
   markdown: {
     remarkPlugins: [remarkMath],

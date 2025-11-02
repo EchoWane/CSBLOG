@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { getAllTags, getPostsByTag } from "../../utils/posts";
+import { siteConfig } from "../../config";
 
 const posts = await getCollection("blog");
 const tags = getAllTags(posts);
@@ -24,7 +25,7 @@ const tagCounts = tags
     {
       tagCounts.map(({ name, count }) => (
         <a
-          href={`/tags/${name}`}
+          href={`${siteConfig.base}/tags/${name}`}
           class="p-4 sm:p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors touch-manipulation active:scale-98"
         >
           <div class="flex items-center justify-between">

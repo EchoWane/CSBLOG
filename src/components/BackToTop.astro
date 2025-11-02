@@ -1,0 +1,80 @@
+---
+// Back to Top Button Component
+---
+
+<button
+  id="back-to-top"
+  aria-label="Back to top"
+  class="fixed bottom-8 left-8 z-40 p-3 rounded-full bg-primary-600 dark:bg-primary-500 text-white shadow-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-all duration-300 opacity-0 invisible hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"
+    ></path>
+  </svg>
+</button>
+
+<script>
+  let scrollHandler: (() => void) | null = null
+
+  // Run on initial load and after every view transition
+  document.addEventListener('astro:page-load', () => {
+    const backToTopButton = document.getElementById('back-to-top')
+
+    if (backToTopButton) {
+      // Show/hide button based on scroll position
+      const toggleButtonVisibility = () => {
+        if (window.scrollY > 300) {
+          backToTopButton.classList.remove('opacity-0', 'invisible')
+          backToTopButton.classList.add('opacity-100', 'visible')
+        } else {
+          backToTopButton.classList.remove('opacity-100', 'visible')
+          backToTopButton.classList.add('opacity-0', 'invisible')
+        }
+      }
+
+      // Scroll to top when clicked
+      backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        })
+      })
+
+      // Remove previous scroll listener if it exists
+      if (scrollHandler) {
+        window.removeEventListener('scroll', scrollHandler)
+      }
+
+      // Store and add new scroll listener
+      scrollHandler = toggleButtonVisibility
+      window.addEventListener('scroll', scrollHandler)
+
+      // Check initial scroll position
+      toggleButtonVisibility()
+    }
+  })
+
+  // Cleanup before page swap
+  document.addEventListener('astro:before-swap', () => {
+    if (scrollHandler) {
+      window.removeEventListener('scroll', scrollHandler)
+      scrollHandler = null
+    }
+  })
+</script>
+
+<style>
+  #back-to-top {
+    will-change: transform, opacity;
+  }
+</style>

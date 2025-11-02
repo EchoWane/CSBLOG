@@ -1,0 +1,233 @@
+---
+import type { Heading } from "../utils/tableOfContents";
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// Don't render if no headings
+if (!headings || headings.length === 0) return null;
+---
+
+<!-- Floating TOC Button (Mobile) -->
+<button
+  id="toc-toggle-btn"
+  class="lg:hidden fixed bottom-6 right-6 z-40 p-4 bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white rounded-full shadow-lg transition-all touch-manipulation"
+  aria-label="Toggle table of contents"
+>
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M4 6h16M4 12h16M4 18h16"></path>
+  </svg>
+</button>
+
+<!-- TOC Sidebar (Mobile Slide-in / Desktop Fixed) -->
+<nav
+  id="toc-sidebar"
+  class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white dark:bg-gray-900 shadow-2xl z-50 transform translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:w-56 xl:w-64 lg:shadow-none lg:bg-transparent lg:dark:bg-transparent"
+>
+  <div class="h-full overflow-y-auto p-6 lg:pt-24 lg:pr-4 xl:pr-8">
+    <!-- Close button (Mobile only) -->
+    <button
+      id="toc-close-btn"
+      class="lg:hidden absolute top-4 right-4 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 touch-manipulation"
+      aria-label="Close table of contents"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <h2
+      class="text-lg font-bold mb-4 text-gray-900 dark:text-white pt-2 lg:pt-0"
+    >
+      Table of Contents
+    </h2>
+    <ul class="space-y-2 text-sm">
+      {
+        headings.map((heading) => (
+          <li
+            class:list={[
+              "toc-item",
+              heading.depth === 2 && "ml-0",
+              heading.depth === 3 && "ml-4",
+              heading.depth === 4 && "ml-8",
+            ]}
+          >
+            <a
+              href={`#${heading.slug}`}
+              data-heading-id={heading.slug}
+              class="toc-link block py-1 text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition-colors border-l-2 border-transparent hover:border-primary-600 dark:hover:border-primary-400 pl-3"
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<!-- Overlay (Mobile only) -->
+<div
+  id="toc-overlay"
+  class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40 hidden"
+>
+</div>
+
+<style>
+  .toc-link.active {
+    color: rgb(67, 122, 84);
+    border-left-color: rgb(67, 122, 84);
+    font-weight: 500;
+  }
+
+  :global(.dark) .toc-link.active {
+    color: rgb(167, 203, 176);
+    border-left-color: rgb(167, 203, 176);
+  }
+
+  /* Custom scrollbar for TOC */
+  #toc-sidebar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  #toc-sidebar::-webkit-scrollbar-track {
+    background: rgba(243, 244, 246, 0.5);
+  }
+
+  #toc-sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.4);
+    border-radius: 4px;
+  }
+
+  #toc-sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(107, 114, 128, 0.6);
+  }
+
+  :global(.dark) #toc-sidebar::-webkit-scrollbar-track {
+    background: rgba(17, 24, 39, 0.5);
+  }
+
+  :global(.dark) #toc-sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(75, 85, 99, 0.5);
+  }
+
+  :global(.dark) #toc-sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(107, 114, 128, 0.7);
+  }
+</style>
+
+<script>
+  function initTableOfContents() {
+    const toggleBtn = document.getElementById("toc-toggle-btn");
+    const sidebar = document.getElementById("toc-sidebar");
+    const closeBtn = document.getElementById("toc-close-btn");
+    const overlay = document.getElementById("toc-overlay");
+    const tocLinks = document.querySelectorAll(".toc-link");
+
+    // Mobile toggle functionality
+    function openTOC() {
+      if (sidebar && overlay) {
+        sidebar.classList.remove("translate-x-full");
+        overlay.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+    }
+
+    function closeTOC() {
+      if (sidebar && overlay) {
+        sidebar.classList.add("translate-x-full");
+        overlay.classList.add("hidden");
+        document.body.style.overflow = "";
+      }
+    }
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", openTOC);
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", closeTOC);
+    }
+
+    if (overlay) {
+      overlay.addEventListener("click", closeTOC);
+    }
+
+    // Close TOC when clicking a link on mobile
+    tocLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        // Close on mobile only
+        if (window.innerWidth < 1024) {
+          closeTOC();
+        }
+
+        // Smooth scroll
+        e.preventDefault();
+        const id = link.getAttribute("data-heading-id");
+        const target = document.getElementById(id || "");
+        if (target) {
+          const offset = 80;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+
+    // Active heading tracking
+    if (tocLinks.length === 0) return;
+
+    const headingElements = Array.from(tocLinks)
+      .map((link) => {
+        const id = link.getAttribute("data-heading-id");
+        return document.getElementById(id || "");
+      })
+      .filter(Boolean) as HTMLElement[];
+
+    if (headingElements.length === 0) return;
+
+    const observerOptions = {
+      rootMargin: "-80px 0px -80% 0px",
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.id;
+        const tocLink = document.querySelector(
+          `.toc-link[data-heading-id="${id}"]`
+        );
+
+        if (entry.isIntersecting && tocLink) {
+          tocLinks.forEach((link) => link.classList.remove("active"));
+          tocLink.classList.add("active");
+        }
+      });
+    }, observerOptions);
+
+    headingElements.forEach((heading) => observer.observe(heading));
+  }
+
+  // Initialize on page load and view transitions
+  document.addEventListener("astro:page-load", initTableOfContents);
+</script>

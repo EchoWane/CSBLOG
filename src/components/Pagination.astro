@@ -1,0 +1,28 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+}
+
+const { currentPage, totalPages, baseUrl } = Astro.props;
+---
+
+<nav class="flex justify-center gap-3 sm:gap-4 mt-8 sm:mt-12">
+  {currentPage > 1 && (
+    <a
+      href={`${baseUrl}${currentPage - 1}`}
+      class="px-5 py-3 sm:px-4 sm:py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors touch-manipulation text-sm sm:text-base font-medium"
+    >
+      Previous
+    </a>
+  )}
+  {currentPage < totalPages && (
+    <a
+      href={`${baseUrl}${currentPage + 1}`}
+      class="px-5 py-3 sm:px-4 sm:py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors touch-manipulation text-sm sm:text-base font-medium"
+    >
+      Next
+    </a>
+  )}
+</nav>

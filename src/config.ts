@@ -26,10 +26,10 @@ export const siteConfig: SiteConfig = {
   description: "Hi there! I'm Amir, a Cybersecurity master's student at Isfahan University of Technology. I like to write about my learning journey. If you're intrested in contributing to this blog, head to the GitHub repository.",
   social: {
     github: "https://www.github.com/EchoWane/CSBLOG", // leave empty if you don't want to show the github
-    linkedin: "https://www.linkedin.com/in/someone/", // leave empty if you don't want to show the linkedin
-    email: "amir.rabiee2001@outlook.com", // leave empty if you don't want to show the email
+    linkedin: "", 
+    email: "amir.rabiee2001@outlook.com",
     rss: true, // set this to false if you don't want to provide an rss feed
-    support: "",
+    // support: "",
   },
   homepage: {
     maxPosts: 5,

@@ -1,3 +1,5 @@
+import { siteConfig } from "../config";
+
 export interface Author {
   id: string;
   name: string;
@@ -16,11 +18,12 @@ export const authors: Record<string, Author> = {
     id: 'amir',
     name: 'Amir Rabiee',
     bio: 'Cybersecurity master\'s student at Isfahan University of Technology. Passionate about security research and software development.',
-    avatar: '/avatar.jpg',
+    avatar: `${siteConfig.base}/default.png`,
     social: {
       github: 'https://www.github.com/EchoWane',
-      linkedin: 'https://www.linkedin.com/in/someone/',
+      // linkedin: 'https://www.linkedin.com/in/someone/',
       email: 'amir.rabiee2001@outlook.com',
+      // support: "https://www.buymeacoffee.com/echowane",
     },
   },
 };

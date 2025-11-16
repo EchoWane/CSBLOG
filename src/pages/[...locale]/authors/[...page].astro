@@ -1,0 +1,52 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Pagination from "@/components/Pagination.astro";
+import { SITE } from "@/config";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "@/i18n/config";
+import { translateFor } from "@/i18n/utils";
+import Layout from "@/layouts/Layout.astro";
+import Main from "@/layouts/Main.astro";
+import Author from "@/components/Author.astro";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  // Get all author files from /data/authors/
+  const authorFiles = await Astro.glob("/src/data/authors/*.md");
+
+  // Paginate authors for each supported locale
+  return SUPPORTED_LOCALES.flatMap(locale => {
+    return paginate(authorFiles, {
+      params: { locale: locale === DEFAULT_LOCALE ? undefined : locale },
+      pageSize: SITE.postPerPage, // Reusing postPerPage for consistency
+    });
+  });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+
+const t = translateFor(Astro.currentLocale);
+---
+
+<Layout title={`${t("authors")} | ${t("site.title")}`}>
+  <Header />
+  <Main pageTitle={t("authors")} pageDesc={t("authors.desc")}>
+    <ul class="space-y-4">
+      {
+        page.data.map(authorFile => (
+          <li>
+            <Author
+              authorId={
+                authorFile.file.split("/").pop()?.replace(".md", "") || ""
+              }
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </Main>
+
+  <Pagination {page} />
+
+  <Footer noMarginTop={page.lastPage > 1} />
+</Layout>

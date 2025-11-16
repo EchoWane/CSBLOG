@@ -1,0 +1,123 @@
+---
+import { translateFor, getRelativeLocalePath } from "@/i18n/utils";
+
+export interface Props {
+  authorId: string;
+  class?: string;
+}
+
+const { authorId, class: className = "" } = Astro.props;
+const t = translateFor(Astro.currentLocale);
+
+// Get author data from /data/authors/
+const authorFiles = await Astro.glob("/src/data/authors/*.md");
+const authorFile = authorFiles.find(file =>
+  file.file.includes(`${authorId}.md`)
+);
+
+if (!authorFile) {
+  throw new Error(`Author with id "${authorId}" not found`);
+}
+
+const { name, latinName, bio, latinBio, avatar, social } =
+  authorFile.frontmatter;
+---
+
+<div class:list={["flex gap-4 rounded-lg bg-muted p-4", className]}>
+  <!-- Author Avatar -->
+  <div class="flex-shrink-0">
+    <img
+      src={`${import.meta.env.BASE_URL}/assets/authors/${avatar}`}
+      alt={`${name}'s avatar`}
+      class="h-16 w-16 rounded-full object-cover"
+    />
+  </div>
+
+  <!-- Author Info -->
+  <div class="flex-1">
+    <!-- Author Name (clickable to see all posts) -->
+    <h3 class="mb-2 text-lg font-bold">
+      <a
+        href={getRelativeLocalePath(
+          Astro.currentLocale,
+          `/authors/${authorId}`
+        )}
+        class="text-accent transition-opacity hover:opacity-75"
+      >
+        {Astro.currentLocale === "fa" ? name : latinName}
+      </a>
+    </h3>
+
+    <!-- Author Bio -->
+    <p class="text-muted-foreground mb-3 text-sm leading-relaxed">
+      {Astro.currentLocale === "fa" ? bio : latinBio}
+    </p>
+
+    <!-- Social Links -->
+    <div class="flex flex-wrap gap-3">
+      {
+        social?.github && (
+          <a
+            href={`https://github.com/${social.github}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded bg-background px-2 py-1 text-xs transition-opacity hover:opacity-75"
+            aria-label={`${name} on GitHub`}
+          >
+            GitHub
+          </a>
+        )
+      }
+      {
+        social?.twitter && (
+          <a
+            href={`https://twitter.com/${social.twitter}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded bg-background px-2 py-1 text-xs transition-opacity hover:opacity-75"
+            aria-label={`${name} on Twitter`}
+          >
+            Twitter
+          </a>
+        )
+      }
+      {
+        social?.linkedin && (
+          <a
+            href={`https://linkedin.com/in/${social.linkedin}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded bg-background px-2 py-1 text-xs transition-opacity hover:opacity-75"
+            aria-label={`${name} on LinkedIn`}
+          >
+            LinkedIn
+          </a>
+        )
+      }
+      {
+        social?.email && (
+          <a
+            href={`mailto:${social.email}`}
+            class="rounded bg-background px-2 py-1 text-xs transition-opacity hover:opacity-75"
+            aria-label={`Email ${name}`}
+          >
+            Email
+          </a>
+        )
+      }
+      {
+        social?.website && (
+          <a
+            href={social.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded bg-background px-2 py-1 text-xs transition-opacity hover:opacity-75"
+            aria-label={`${name}'s website`}
+          >
+            Website
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>

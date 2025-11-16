@@ -1,0 +1,86 @@
+---
+import { getLocaleInfo, translateFor } from "@/i18n/utils";
+import { DateTime } from "luxon";
+import IconCalendar from "@/assets/icons/IconCalendar.svg";
+import { SITE } from "@/config";
+import moment from "moment-jalaali";
+
+export interface Props {
+  class?: string;
+  size?: "sm" | "lg";
+  timezone: string | undefined;
+  pubDatetime: string | Date;
+  modDatetime: string | Date | undefined | null;
+}
+
+const {
+  pubDatetime,
+  modDatetime,
+  size = "sm",
+  class: className = "",
+  timezone: postTimezone,
+} = Astro.props;
+
+const currentLocale = Astro.currentLocale;
+
+const LOCALE = getLocaleInfo(currentLocale);
+
+const t = translateFor(currentLocale);
+
+/* ========== Formatted Datetime ========== */
+const latestDatetime =
+  modDatetime && modDatetime > pubDatetime ? modDatetime : pubDatetime;
+const datetime = DateTime.fromJSDate(new Date(latestDatetime))
+  .setZone(postTimezone || SITE.timezone)
+  .setLocale(LOCALE.langTag);
+
+const persianMonths = [
+  "فروردین",
+  "اردیبهشت",
+  "خرداد",
+  "تیر",
+  "مرداد",
+  "شهریور",
+  "مهر",
+  "آبان",
+  "آذر",
+  "دی",
+  "بهمن",
+  "اسفند",
+];
+
+const jDate = moment(latestDatetime);
+const day = jDate.jDate(); // Persian day
+const month = jDate.jMonth(); // Persian month (0-based)
+const year = jDate.jYear(); // Persian year
+
+const date =
+  currentLocale === "fa"
+    ? `${jDate.jDate()} ${persianMonths[jDate.jMonth()]} ${jDate.jYear()}`
+    : datetime.toFormat("d MMM, yyyy");
+const time = datetime.toFormat("hh:mm a"); // e.g., '08:30 PM'
+---
+
+<div class:list={["flex items-end space-x-2 opacity-80", className]}>
+  <IconCalendar
+    class:list={[
+      "inline-block size-6 min-w-[1.375rem]",
+      { "scale-90": size === "sm" },
+    ]}
+  />
+  {
+    modDatetime && modDatetime > pubDatetime ? (
+      <span class:list={["text-sm italic", { "sm:text-base": size === "lg" }]}>
+        {t("date.updated")}:
+      </span>
+    ) : (
+      <span class="sr-only">{t("date.published")}:</span>
+    )
+  }
+  <span class:list={["text-sm italic", { "sm:text-base": size === "lg" }]}>
+    <time datetime={datetime.toISO()}>{date}</time>
+    <span aria-hidden="true"> | </span>
+    <span class="sr-only">&nbsp;at&nbsp;</span>
+    <span class="text-nowrap">{time}</span>
+  </span>
+</div>

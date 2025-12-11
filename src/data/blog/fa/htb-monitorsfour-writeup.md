@@ -1,6 +1,6 @@
 ---
 author: "amir_rabiee"
-pubDatetime: 2025-12-11T15:46:45.51
+pubDatetime: 2025-12-10T15:46:45.51
 title: "گزارش کامل از حل CTF MonitorsFour - HackTheBox"
 featured: false
 draft: false

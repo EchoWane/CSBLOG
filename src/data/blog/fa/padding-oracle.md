@@ -13,7 +13,7 @@ description: "چطوری لاگ کردن یک ارور ساده میتونه ی�
 
 ## فهرست مطالب
 
-## CBC، چیست و چرا ازش استفاده می کنیم؟
+## CBC، چیه و چرا ازش استفاده می کنیم؟
 
 اگر ما بخوایم هر بلوک plaintext رو جداگانه رمزنگاری کنیم،‌بلوک های تکراری به بلوک های رمزنگاری شده یکسانی تبدیل خواهد شد. 
 
@@ -86,7 +86,7 @@ $$
 
 اگه ما $C_{i-1}$ رو عوض کنیم، $P_i$ هم عوض میشه، بدون اینکه نیاز باشیم key رو بدونیم!
 
-### مراحل حمله برای یک بایت:
+### مراحل حمله برای یک بایت
 
 فرض کن می‌خوایم آخرین بایت یه بلوک رو پیدا کنیم.
 
@@ -98,7 +98,7 @@ $$
 
 برای بایت بعدی، باید padding `02 02` درست کنیم، و همینطور ادامه میده.
 
-### مثال عملی:
+### مثال عملی
 ```python
 def padding_oracle_attack(ciphertext, iv, oracle):
     block_size = 16
@@ -134,14 +134,14 @@ def padding_oracle_attack(ciphertext, iv, oracle):
 - برای یه بلوک ۱۶ بایتی: حداکثر $256 \times 16 = 4096$ تلاش
 - برای رمزنگاری AES-128 که $2^{128}$ حالت داره، این خیلی کمه
 
-## مثال های واقعی:
+## مثال های واقعی
 
 1. **ASP.NET (2010)**: به خاطر leak کردن padding errors، vulnerable بود
 2. **Java JSF ViewState (2010)**: همین مشکل
 3. **Ruby on Rails (2013)**: در timing attacks
 4. **OpenSSL**: در نسخه های قدیمی‌تر
 
-## دفاع در برابر حمله:
+## دفاع در برابر حمله
 
 ### ۱. Encrypt-then-MAC
 ```python
@@ -176,7 +176,7 @@ ciphertext = aesgcm.encrypt(nonce, plaintext, associated_data)
 ### ۴. Constant-time operations
 همیشه یه مقدار ثابت زمان صرف کن، حتی اگه padding غلط بود.
 
-## نتیجه گیری:
+## نتیجه گیری
 
 یه ارور ساده padding میتونه کل امنیت رمزنگاری رو بشکونه. همیشه:
 - از MAC استفاده کن
@@ -186,8 +186,7 @@ ciphertext = aesgcm.encrypt(nonce, plaintext, associated_data)
 
 امنیت فقط به الگوریتم رمزنگاری بستگی نداره، پیاده سازی هم مهمه.
 
-## منابع:
+## منابع
 
-- [Vaudenay's Original Paper (2002)](https://www.iacr.org/cryptodb/archive/eurocrypt2002/23320530/23320530.pdf)
 - [OWASP Padding Oracle](https://owasp.org/www-community/attacks/Padding_Oracle_Attack)
 - [Practical Padding Oracle Attacks](https://robertheaton.com/2013/07/29/padding-oracle-attack/)

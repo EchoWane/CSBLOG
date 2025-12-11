@@ -4,15 +4,15 @@ title: "About"
 
 ## What is CSBLOG?
 
-A collaborative blog for computer science students and developers sharing experiences, tutorials, and insights about cybersecurity and software development.
+A collaborative blog.
 
 ## Contributing
 
-Want to write for us? 
+Want to write with me? 
 
-Head to our Github, fork the repo and send us a pull request.
+Head to the Github repo, fork and send a pull request.
 
-We will review and publish your post!
+I will review and publish your post!
 
 ## Tech Stack
 

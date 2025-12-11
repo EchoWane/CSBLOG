@@ -1,6 +1,6 @@
 ---
 author: "amir_rabiee"
-pubDatetime: 2025-12-11T22:58:45.51
+pubDatetime: 2025-12-11T15:46:45.51
 title: "HTB - Monitorsfour Machine Writeup"
 featured: false
 draft: false

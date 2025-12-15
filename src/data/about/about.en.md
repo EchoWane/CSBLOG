@@ -8,11 +8,8 @@ A collaborative blog.
 
 ## Contributing
 
-Want to write with me? 
-
-Head to the Github repo, fork and send a pull request.
-
-I will review and publish your post!
+Interested in co-authoring an article?
+Contact me first to discuss potential topics and collaboration. Once we agree on a direction, we'll work together through the Github repo - you can fork, make your changes, and submit a PR.
 
 ## Tech Stack
 

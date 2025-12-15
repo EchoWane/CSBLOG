@@ -5,7 +5,7 @@
 :root,
 html[data-theme="light"] {
   --background: #eff0f5; /* Latte Base */
-  --foreground: #4c4f69; /* Latte Text */
+  --foreground: #333; /* Latte Text */
   --accent: #dd7878; /* Latte Mauve */
   --muted: #e5e9f0; /* Latte Surface0 */
   --border: #8839ef; /* Latte Surface1 */

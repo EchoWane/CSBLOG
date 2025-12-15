@@ -11,7 +11,7 @@ const ENLocale: I18nStrings = {
   "hero.title": "Welcome!",
   "hero.body":
     "Here, I write about my journey through software development and cybersecurity. This blog supports multiple authors, so, if you wanna write with me, checkout the blog's repo.",
-  "hero.beforeReadme": "You can contact me on discord @echowane, or via the email at the bottom of the page. To recieve notice about new articles, subscribe to the RSS feed or just to the telegram channel down in the footer.",
+  "hero.beforeReadme": "You can contact me on discord @echowane, or via the email at the bottom of the page. To recieve notice about new articles, subscribe to the RSS feed.",
   "hero.buyCoffee": "",
   "hero.afterReadme":
     "",

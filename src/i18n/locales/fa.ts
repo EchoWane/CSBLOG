@@ -13,7 +13,7 @@ const FALocale: I18nStrings = {
   "hero.beforeReadme": "اگر از مطالب خوشت اومد یا بدردت خورد:",
   "hero.buyCoffee": "یه قهوه ای برامون بخر :)",
   "hero.afterReadme":
-    "برای اطلاع از مقاله های جدید، میتونی از rss (لینک کنار 'خوش آمدی') و یه rss reader مستقیم استفاده کنی، یا عضو کانال تلگرام بشی که لینکش پایین صفحه هست.",
+    "برای اطلاع از مقاله های جدید، میتونی از rss (لینک کنار 'خوش آمدی') و یه rss reader استفاده کنی.",
   "hero.coffeeLink": "https://coffeebede.com/echowane",
   copy: "کپی",
   copied: "کپی شد",

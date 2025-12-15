@@ -22,12 +22,12 @@ export const SOCIALS = [
   //   linkTitle: (t: Translator) => t("socials.x"),
   //   icon: IconBrandX,
   // },
-  {
-    name: "Telegram",
-    href: "https://t.me/blog_newsletter",
-    linkTitle: (t: Translator) => t("socials.telegram"),
-    icon: IconTelegram,
-  },
+  // {
+  //   name: "Telegram",
+  //   href: "https://t.me/EchoWane",
+  //   linkTitle: (t: Translator) => t("socials.telegram"),
+  //   icon: IconTelegram,
+  // },
   {
     name: "Github",
     href: "https://github.com/echowane/blog",

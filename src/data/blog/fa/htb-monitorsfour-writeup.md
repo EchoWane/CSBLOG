@@ -1,5 +1,5 @@
 ---
-author: "amir_rabiee"
+author: "amir"
 pubDatetime: 2025-12-10T15:46:45.51
 modDatetime: 2025-12-11T12:46:45.51
 title: "گزارش کامل از حل HTB - MonitorsFour"

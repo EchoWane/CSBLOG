@@ -12,7 +12,7 @@ type Translator = ReturnType<typeof translateFor>;
 export const SOCIALS = [
   {
     name: "Email",
-    href: "mailto:amir.rabiee2001@outlook.com",
+    href: "mailto:ech0wane@proton.me",
     linkTitle: (t: Translator) => t("socials.mail"),
     icon: IconMail,
   },
@@ -21,12 +21,6 @@ export const SOCIALS = [
   //   href: "https://x.com/username",
   //   linkTitle: (t: Translator) => t("socials.x"),
   //   icon: IconBrandX,
-  // },
-  // {
-  //   name: "Telegram",
-  //   href: "https://t.me/EchoWane",
-  //   linkTitle: (t: Translator) => t("socials.telegram"),
-  //   icon: IconTelegram,
   // },
   {
     name: "Github",

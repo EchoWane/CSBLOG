@@ -1,5 +1,5 @@
 ---
-author: "amir_rabiee"
+author: "amir"
 pubDatetime: 2025-12-13T16:46:45.51
 title: "رفع مشکل اتصال OpenVPN پلتفرم های HTB ،THM و غیره"
 featured: false

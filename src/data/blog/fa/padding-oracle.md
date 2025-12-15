@@ -1,5 +1,5 @@
 ---
-author: "amir_rabiee"
+author: "amir"
 pubDatetime: 2025-11-16T22:58:45.51
 title: "نگاهی بر حمله Padding Oracle"
 featured: false

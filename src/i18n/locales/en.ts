@@ -3,14 +3,14 @@ import type { I18nStrings } from "@/i18n/types";
 const baseStrings = {
   "site.title": "EchoWane's Blog",
   "site.desc":
-    "I write about my journey in cybersecurity and software development",
+    "Just another tech blog",
 };
 
 const ENLocale: I18nStrings = {
   ...baseStrings,
   "hero.title": "Welcome!",
   "hero.body":
-    "Here, I write about my journey through software development and cybersecurity. This blog supports multiple authors, so, if you wanna write with me, checkout the blog's repo.",
+    "Just another tech blog, I guess.",
   "hero.beforeReadme": "You can contact me on discord @echowane, or via the email at the bottom of the page. To recieve notice about new articles, subscribe to the RSS feed.",
   "hero.buyCoffee": "",
   "hero.afterReadme":
